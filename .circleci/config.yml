@@ -4,11 +4,14 @@ jobs:
   print:
     docker:
       - image: cimg/node:lts
+    environment:
+      myName: <<MyFirstName>>
     steps:
       - run:
           name: type my name
           command: |
-            echo >>MyFirstName
+            echo $myName
+            echo
 workflows:
   default: 
     jobs:
