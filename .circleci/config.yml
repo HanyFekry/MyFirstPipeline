@@ -8,7 +8,7 @@ jobs:
       - run:
           name: type my name
           command: |
-            echo $MyFirstName
+            echo >>MyFirstName
 workflows:
   default: 
     jobs:
