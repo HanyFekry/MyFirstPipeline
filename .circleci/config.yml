@@ -1,23 +1,15 @@
 version: 2.1
 
 jobs:
-  build:
+  print:
     docker:
       - image: cimg/node:lts
     steps:
-      - checkout
-      - run: 
-          name: install node dependencies
-          command: |
-            npm install
       - run:
-          name: build
+          name: type my name
           command: |
-            npm run build
-      - run:
-          name: list build outputs
-          command: |
-            ls ./build
-
-#workflows:
-#  default: 
+            echo ${MyFirstName}
+workflows:
+  default: 
+    jobs:
+      - print
