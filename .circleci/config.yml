@@ -7,10 +7,11 @@ jobs:
     environment:
       MyLastName : Aly
     steps:
+      - checkout
       - run:
           name: type my name
           command: |
-            echo "<<MyFirstName>>"
+            echo $MyFirstName
             echo $MyLastName
 
 workflows:
