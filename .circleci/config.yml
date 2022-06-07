@@ -3,12 +3,16 @@ version: 2.1
 jobs:
   print:
     docker:
-      - image: cimg/node:lts    
+      - image: cimg/node:lts  
+    environment:
+      MyLastName : Aly
     steps:
       - run:
           name: type my name
           command: |
-            echo "<<MyFirstname>>"
+            echo "<<MyFirstName>>"
+            echo $MyLastName
+
 workflows:
   default: 
     jobs:
