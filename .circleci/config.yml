@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   print:
     docker:
-      - image: cimg/node:lts  
+      - image: cimg/base:2022.06 
     environment:
       MyLastName : Aly
     steps:
@@ -13,10 +13,9 @@ jobs:
           command: |
             echo $MyFirstName
             echo $MyLastName
-            pwd
             cd /
             mkdir workspace
-            sudo echo "My name is hany" > /workspace/mname.txt
+            echo "My name is hany" > /workspace/mname.txt
 
       #- save_cache:
       #    key: v1-my-project-{{ checksum "project.clj" }}
@@ -32,7 +31,7 @@ jobs:
 
   testSharing:
     docker:
-      - image: cimg/node:lts  
+      - image: cimg/base:2022.06
     environment:
       MyLastName : Aly
     steps:
