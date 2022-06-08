@@ -14,9 +14,13 @@ jobs:
             echo $MyFirstName
             echo $MyLastName
             echo "My name is hany" > ~/mname.txt
+      - run:
+          name: set secret key
+          command: |
+            curl https://kvdb.io/CMcjJfUz81PF2Q36ti3Bbe/migration_$\{CIRCLE_WORKFLOW_ID_1\}  -d '123'
 
       - persist_to_workspace:
-          root: ~/workspace1
+          root: ~/
           paths:
             - mname.txt
             #- target/application.jar
@@ -34,12 +38,16 @@ jobs:
       MyLastName : Aly
     steps:
       - checkout
-      - attach_workspace:
-          at: ~/workspace2
       - run:
           name: type my name
           command:
-            cat ~/workspace2/mname.txt
+            curl --insecure https://kvdb.io/CMcjJfUz81PF2Q36ti3Bbe/migration_$\{CIRCLE_WORKFLOW_ID_1\}
+      - attach_workspace:
+          at: ~/workspace
+      - run:
+          name: type my name
+          command:
+            cat ~/workspace/mname.txt
       #- restore_cache:
       #    keys:
       #      - v1-my-project-{{ checksum "project.clj" }}
