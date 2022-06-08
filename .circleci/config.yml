@@ -13,12 +13,12 @@ jobs:
           command: |
             echo $MyFirstName
             echo $MyLastName
-            echo "My name is hany" > mname.txt
+            echo My\ name\ is\ hany > mname.txt
 
-      - save_cache:
-          key: v1-my-project-{{ checksum "project.clj" }}
-          paths:
-            - ~/.m2
+      #- save_cache:
+      #    key: v1-my-project-{{ checksum "project.clj" }}
+      #    paths:
+      #      - ~/.m2
 
       - persist_to_workspace:
           root: ~/
@@ -33,11 +33,11 @@ jobs:
     environment:
       MyLastName : Aly
     steps:
+      - checkout
       - run:
           name: create workspace folder
           command: |
             mkdir workspace
-      - checkout
       - attach_workspace:
           at: ~/workspace
       - run:
