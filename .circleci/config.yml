@@ -11,9 +11,9 @@ commands:
     parameters:
       to:
         type: string
-        default: "my_friend"
+        default: "my friend"
     steps:
-      - run: echo command test #<< parameters.to>>
+      - run: echo hellow << parameters.to>>
 jobs:
   print:
     docker:
