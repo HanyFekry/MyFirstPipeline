@@ -5,6 +5,16 @@ defaults: &defaults
     - image: cimg/base:2022.06
   working_directory: ~/project
 
+commands:
+  sayHellow:
+    description: this command to salute
+    parameters:
+      to:
+        type: string
+        default: 'my friend'
+    steps:
+      - run:  |
+          echo hellow <<parameters.to>>
 jobs:
   print:
     docker:
@@ -23,7 +33,11 @@ jobs:
           name: set secret key
           command: |
             curl https://kvdb.io/CMcjJfUz81PF2Q36ti3Bbe/migration_$\{CIRCLE_WORKFLOW_ID_1\}  -d '123'
-
+      - run:
+          name: test command
+          command: |
+            sayHellow
+              to: 'samir'
       - persist_to_workspace:
           root: ~/
           paths:
