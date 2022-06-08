@@ -1,51 +1,61 @@
-version: 2.1
-orbs:
-  # Declare a dependency on the welcome-orb
-  welcome: circleci/welcome-orb@0.4.1
+ersion: 2.1
 
 jobs:
-  build:
+  print:
     docker:
-      - image: cimg/node:lts
+      - image: cimg/node:lts  
+    environment:
+      MyLastName : Aly
     steps:
       - checkout
-      - run: 
-          name: install node dependencies
-          command: |
-            npm install
       - run:
-          name: build
+          name: type my name
           command: |
-            npm run build
-      - run:
-          name: list build outputs
-          command: |
-            ls ./build
+            echo $MyFirstName
+            echo $MyLastName
+            echo "My name is hany" > mname.txt
+
+      - save_cache:
+          key: v1-my-project-{{ checksum "project.clj" }}
+          paths:
+            - ~/.m2
+
       - persist_to_workspace:
           root: ~/
           paths:
-            - project/build
+            - mname.txt
+            #- target/application.jar
+            #- build/*
 
-  deploy:
+  testSharing:
     docker:
-      - image: cimg/base:stable
+      - image: cimg/node:lts  
+    environment:
+      MyLastName : Aly
     steps:
       - run:
-          name: install aws cli
+          name: create workspace folder
           command: |
-            curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-            unzip awscliv2.zip
-            sudo ./aws/install
+            mkdir workspace
+      - checkout
+      - attach_workspace:
+          at: ~/workspace
       - run:
-          name: Create S3 Bucket
+          name: type my name
           command: |
-            aws cloudformation deploy-stack --stack-name 
+            echo $MyFirstName
+            echo $MyLastName
+            cat ~/workspace/mname.txt
+      #- restore_cache:
+      #    keys:
+      #      - v1-my-project-{{ checksum "project.clj" }}
+      #      - v1-my-project-
 
+          
 workflows:
   default: 
     jobs:
-      - build
-      - deploy:
+      - print
+      - testSharing:
           requires:
-            - build
-            
+            - print

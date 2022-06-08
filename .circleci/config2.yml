@@ -1,0 +1,51 @@
+version: 2.1
+orbs:
+  # Declare a dependency on the welcome-orb
+  welcome: circleci/welcome-orb@0.4.1
+
+jobs:
+  build:
+    docker:
+      - image: cimg/node:lts
+    steps:
+      - checkout
+      - run: 
+          name: install node dependencies
+          command: |
+            npm install
+      - run:
+          name: build
+          command: |
+            npm run build
+      - run:
+          name: list build outputs
+          command: |
+            ls ./build
+      - persist_to_workspace:
+          root: ~/
+          paths:
+            - project/build
+
+  deploy:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - run:
+          name: install aws cli
+          command: |
+            curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+            unzip awscliv2.zip
+            sudo ./aws/install
+      - run:
+          name: Create S3 Bucket
+          command: |
+            aws cloudformation deploy-stack --stack-name 
+
+workflows:
+  default: 
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
+            
