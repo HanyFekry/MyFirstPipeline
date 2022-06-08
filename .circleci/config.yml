@@ -14,7 +14,7 @@ jobs:
             echo $MyFirstName
             echo $MyLastName
             mkdir workspace
-            echo "My name is hany" > /workspace/mname.txt
+            sudo echo "My name is hany" > /workspace/mname.txt
 
       #- save_cache:
       #    key: v1-my-project-{{ checksum "project.clj" }}
