@@ -13,9 +13,7 @@ jobs:
           command: |
             echo $MyFirstName
             echo $MyLastName
-            cd /
-            mkdir workspace
-            echo "My name is hany" > /workspace/mname.txt
+            echo "My name is hany" > ~/mname.txt
 
       #- save_cache:
       #    key: v1-my-project-{{ checksum "project.clj" }}
@@ -23,7 +21,7 @@ jobs:
       #      - ~/.m2
 
       - persist_to_workspace:
-          root: /workspace
+          root: ~/
           paths:
             - mname.txt
             #- target/application.jar
