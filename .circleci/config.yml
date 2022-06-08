@@ -13,8 +13,7 @@ commands:
         type: string
         default: "my friend"
     steps:
-      - run: |
-          echo << parameters.to>>
+      - run: echo << parameters.to>>
 jobs:
   print:
     docker:
@@ -23,6 +22,8 @@ jobs:
       MyLastName : Aly
     steps:
       - checkout
+      - sayHellow: 
+              to: "samir"
       - run:
           name: type my name
           command: |
@@ -33,8 +34,6 @@ jobs:
           name: set secret key
           command: |
             curl https://kvdb.io/CMcjJfUz81PF2Q36ti3Bbe/migration_$\{CIRCLE_WORKFLOW_ID_1\}  -d '123'
-      - sayHellow: 
-              to: "samir"
       - persist_to_workspace:
           root: ~/
           paths:
