@@ -15,17 +15,17 @@ jobs:
             echo $MyLastName
             echo "My name is hany" > ~/mname.txt
 
-      #- save_cache:
-      #    key: v1-my-project-{{ checksum "project.clj" }}
-      #    paths:
-      #      - ~/.m2
-
       - persist_to_workspace:
-          root: ~/
+          root: ~/workspace1
           paths:
             - mname.txt
             #- target/application.jar
             #- build/*
+
+      #- save_cache:
+      #    key: v1-my-project-{{ checksum "project.clj" }}
+      #    paths:
+      #      - ~/.m2
 
   testSharing:
     docker:
@@ -34,18 +34,12 @@ jobs:
       MyLastName : Aly
     steps:
       - checkout
-      #- run:
-      #    name: create workspace folder
-      #    command: |
-      #      mkdir workspace
       - attach_workspace:
-          at: ~/workspace
+          at: ~/workspace2
       - run:
           name: type my name
-          command: |
-            echo $MyFirstName
-            echo $MyLastName
-            cat ~/workspace/mname.txt
+          command:
+            cat ~/workspace2/mname.txt
       #- restore_cache:
       #    keys:
       #      - v1-my-project-{{ checksum "project.clj" }}
