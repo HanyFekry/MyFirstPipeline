@@ -13,7 +13,8 @@ jobs:
           command: |
             echo $MyFirstName
             echo $MyLastName
-            echo My\ name\ is\ hany > mname.txt
+            mkdir workspace
+            echo "My name is hany" > /workspace/mname.txt
 
       #- save_cache:
       #    key: v1-my-project-{{ checksum "project.clj" }}
@@ -21,7 +22,7 @@ jobs:
       #      - ~/.m2
 
       - persist_to_workspace:
-          root: ~/
+          root: /workspace
           paths:
             - mname.txt
             #- target/application.jar
@@ -34,12 +35,12 @@ jobs:
       MyLastName : Aly
     steps:
       - checkout
-      - run:
-          name: create workspace folder
-          command: |
-            mkdir workspace
+      #- run:
+      #    name: create workspace folder
+      #    command: |
+      #      mkdir workspace
       - attach_workspace:
-          at: ~/workspace
+          at: /workspace
       - run:
           name: type my name
           command: |
