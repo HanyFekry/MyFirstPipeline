@@ -69,9 +69,13 @@ jobs:
   test_command:
     <<: *defaults
     steps:
-      - checkout
       - say_hellow: 
               to: "samir"
+      - run: 
+          name: do something when job fails
+          command: echo this is a faild job
+          when: on_fail
+  
 
 workflows:
   default: 
