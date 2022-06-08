@@ -13,6 +13,7 @@ jobs:
           command: |
             echo $MyFirstName
             echo $MyLastName
+            cd /
             mkdir workspace
             sudo echo "My name is hany" > /workspace/mname.txt
 
