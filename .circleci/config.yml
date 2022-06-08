@@ -22,8 +22,6 @@ jobs:
       MyLastName : Aly
     steps:
       - checkout
-      - sayHellow: 
-              to: "samir"
       - run:
           name: type my name
           command: |
@@ -68,7 +66,13 @@ jobs:
       #    keys:
       #      - v1-my-project-{{ checksum "project.clj" }}
       #      - v1-my-project-
-          
+  testCommand:
+    <<: *defaults
+    steps:
+      - checkout
+      - sayHellow: 
+              to: "samir"
+
 workflows:
   default: 
     jobs:
