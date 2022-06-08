@@ -6,7 +6,7 @@ defaults: &defaults
   working_directory: ~/project
 
 commands:
-  sayHellow:
+  say_hellow:
     description: "this command to salute"
     parameters:
       to:
@@ -66,11 +66,11 @@ jobs:
       #    keys:
       #      - v1-my-project-{{ checksum "project.clj" }}
       #      - v1-my-project-
-  testCommand:
+  test_command:
     <<: *defaults
     steps:
       - checkout
-      - sayHellow: 
+      - say_hellow: 
               to: "samir"
 
 workflows:
