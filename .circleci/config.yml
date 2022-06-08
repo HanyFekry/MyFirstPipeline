@@ -71,11 +71,14 @@ jobs:
     steps:
       - say_hellow: 
               to: samir - ${CIRCLE_WORKFLOW_ID} \& <<pipeline.id>>
+  test_onfail_action:
+    <<: *defaults
+    steps:
+      - run: return 1 
       - run: 
           name: do something when job fails
           command: echo this is a faild job
           when: on_fail
-  
 
 workflows:
   default: 
@@ -85,3 +88,4 @@ workflows:
       #    requires:
       #      - print
       - test_command
+      - test_onfail_action
