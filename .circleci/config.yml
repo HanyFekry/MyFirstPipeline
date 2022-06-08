@@ -7,11 +7,11 @@ defaults: &defaults
 
 commands:
   sayHellow:
-    description: this command to salute
+    description: "this command to salute"
     parameters:
       to:
         type: string
-        default: 'my friend'
+        default: "my friend"
     steps:
       - run:  |
           echo hellow <<parameters.to>>
@@ -36,8 +36,8 @@ jobs:
       - run:
           name: test command
           command: |
-            sayHellow
-              to: 'samir'
+            sayHellow: 
+              to: "samir"
       - persist_to_workspace:
           root: ~/
           paths:
