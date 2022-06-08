@@ -1,5 +1,10 @@
 version: 2.1
 
+defaults: &defaults
+  docker:
+    - image: cimg/base:2022.06
+  working_directory: ~/project
+
 jobs:
   print:
     docker:
@@ -32,11 +37,11 @@ jobs:
       #      - ~/.m2
 
   testSharing:
-    <<: *defaults
+    << : *defaults
     #docker:
     #  - image: cimg/base:2022.06
     environment:
-      MyLastName : Aly
+      MyLastName : Aly ${CIRCLE_WORKFLOW_ID}
     steps:
       - checkout
       - run:
@@ -53,10 +58,6 @@ jobs:
       #    keys:
       #      - v1-my-project-{{ checksum "project.clj" }}
       #      - v1-my-project-
-defaults: &defaults
-  docker:
-    - image: cimg/base:2022.06
-  working_directory: ~/project
           
 workflows:
   default: 
