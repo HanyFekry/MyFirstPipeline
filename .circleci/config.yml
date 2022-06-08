@@ -13,8 +13,8 @@ commands:
         type: string
         default: "my friend"
     steps:
-      - run:  |
-          echo hellow <<parameters.to>>
+      - run: |
+          echo << parameters.to>>
 jobs:
   print:
     docker:
