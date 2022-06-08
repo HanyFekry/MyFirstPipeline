@@ -76,7 +76,8 @@ jobs:
 workflows:
   default: 
     jobs:
-      - print
-      - testSharing:
-          requires:
-            - print
+      #- print
+      #- testSharing:
+      #    requires:
+      #      - print
+      - test_command
