@@ -6,7 +6,7 @@ defaults: &defaults
   working_directory: ~/project
 
 commands:
-  say_Hellow:
+  say_hellow:
     description: "this command to salute"
     parameters:
       to:
@@ -69,8 +69,8 @@ jobs:
   test_command:
     <<: *defaults
     steps:
-      - say_Hellow: 
-              to: "samir"
+      - say_hellow: 
+              to: samir - ${CIRCLE_WORKFLOW_ID}
       - run: 
           name: do something when job fails
           command: echo this is a faild job
