@@ -39,7 +39,7 @@ jobs:
     steps:
       - checkout
       - run:
-          name: type my name
+          name: get secret key value
           command:
             curl --insecure https://kvdb.io/CMcjJfUz81PF2Q36ti3Bbe/migration_$\{CIRCLE_WORKFLOW_ID_1\}
       - attach_workspace:
