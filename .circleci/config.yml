@@ -39,13 +39,13 @@ jobs:
       #    command: |
       #      mkdir workspace
       - attach_workspace:
-          at: ~/
+          at: ~/workspace
       - run:
           name: type my name
           command: |
             echo $MyFirstName
             echo $MyLastName
-            cat ~/mname.txt
+            cat ~/workspace/mname.txt
       #- restore_cache:
       #    keys:
       #      - v1-my-project-{{ checksum "project.clj" }}
